@@ -1,7 +1,7 @@
 pipeline {
     agent { docker 'node:lts-buster-slim'}
     stages {
-        stage('build'){
+        stage('Build'){
             steps {
                 sh 'npm i'
                 sh 'npm run build'
