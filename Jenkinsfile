@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'ls -al'
             }
         }
         stage('Deploy'){
