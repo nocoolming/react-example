@@ -25,8 +25,6 @@ pipeline {
         stage('Deploy'){
             agent any
             steps {
-                sh 'echo $version'
-		        sh 'echo "version is :" $version '
                 sh 'docker build -t nocoolming/react-app:v$version .'
                 sh 'ls -al '
                 sh 'cat ./docker_hub_password.txt | docker login --username nocoolming --password-stdin'
