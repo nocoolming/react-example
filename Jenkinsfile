@@ -5,6 +5,12 @@ pipeline {
         stage('Build'){
             agent { docker 'node:lts-buster-slim' }
             steps {
+
+                sh 'echo "Timestamp: ${currentBuild.startTimeInMillis}"'
+                sh 'echo "Timestamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"'
+                sh 'VERSION = ${currentBuild.startTimeInMillis}'
+                sh 'echo ${VERSION}'
+		        sh 'echo "version is :" ${VERSION} '
                 sh 'npm i'
                 sh 'npm run build'
 
