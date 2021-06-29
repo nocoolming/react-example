@@ -19,7 +19,7 @@ pipeline {
             steps {
                 sh 'docker build -t nocoolming/react-app:latest .'
                 sh 'ls -al '
-                sh 'cat ~/docker_hub_password.txt | docker login --username nocoolming --password-stdin'
+                sh 'cat ./docker_hub_password.txt | docker login --username nocoolming --password-stdin'
                 sh 'docker push nocoolming/react-app:latest'
             }
         }
