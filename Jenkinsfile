@@ -17,10 +17,12 @@ pipeline {
         stage('Deploy'){
             agent any
             steps {
-                sh 'docker build -t nocoolming/react-app:latest .'
+                sh 'VERSION=$(date +%s)'
+		sh 'echo 'version is : ${VERSION}'
+                sh 'docker build -t nocoolming/react-app:${VERSION} .'
                 sh 'ls -al '
                 sh 'cat ./docker_hub_password.txt | docker login --username nocoolming --password-stdin'
-                sh 'docker push nocoolming/react-app:latest'
+                sh 'docker push nocoolming/react-app:${VERSION}'
             }
         }
         
