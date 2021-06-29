@@ -5,7 +5,7 @@ pipeline {
         stage('Build'){
             agent { docker 'node:lts-buster-slim' }
             steps {
-                sh 'VERSION = $(date +%s)'
+                VERSION = sh '$(date +%s)'
                 sh 'echo $VERSION'
 		        sh 'echo "version is :" $VERSION '
                 sh 'npm i'
@@ -21,7 +21,7 @@ pipeline {
         stage('Deploy'){
             agent any
             steps {
-                sh 'VERSION = $(date +%s)'
+                VERSION = sh '$(date +%s)'
                 sh 'echo $VERSION'
 		        sh 'echo "version is :" $VERSION '
                 sh 'docker build -t nocoolming/react-app:v$VERSION .'
