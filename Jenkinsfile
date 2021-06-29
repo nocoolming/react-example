@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy'){
             agent any
             steps {
-                def VERSION = sh '$(date +%s)'
+                def VERSION = new Date().getTime()
                 sh 'echo ${VERSION}'
 		        sh 'echo "version is :" ${VERSION} '
                 sh 'docker build -t nocoolming/react-app:v${VERSION} .'
