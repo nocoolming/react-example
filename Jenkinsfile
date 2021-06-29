@@ -5,7 +5,6 @@ pipeline {
             agent any
             steps {
                 sh 'node --version'
-                sh 'docker version'
             }
         }
         stage('Build'){
