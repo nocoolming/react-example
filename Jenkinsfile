@@ -20,7 +20,7 @@ pipeline {
             steps {
                 sh 'echo "Timestamp: ${currentBuild.startTimeInMillis}'
                 sh 'echo "Timestamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"'
-                def VERSION = currentBuild.startTimeInMillis
+                sh 'VERSION = ${currentBuild.startTimeInMillis}'
                 sh 'echo ${VERSION}'
 		        sh 'echo "version is :" ${VERSION} '
                 sh 'docker build -t nocoolming/react-app:v${VERSION} .'
