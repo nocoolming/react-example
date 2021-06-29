@@ -4,22 +4,22 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'node --version'
-                docker versionß
+                sh 'docker version'
             }
         }
         stage('Build'){
             steps {
                 sh 'npm i'
                 sh 'npm run build'
-                docker build -t nocoolming/react-app:latest version .
-                sh 'ls '
-                cat ~/docker_hub_password | docker login --username nocoolming --password-stdin
-                docker push nocoolming/react-app:latest
+                sh 'docker build -t nocoolming/react-app:latest version .'
+                sh 'ls -al '
+                sh 'cat ~/docker_hub_password | docker login --username nocoolming --password-stdin'
+                sh 'docker push nocoolming/react-app:latest'
             }
         }
         stage('Deploy'){
             steps {
-                docker push nocoolming/react-app:latest
+                sh 'docker push nocoolming/react-app:latest'
             }
         }
         
