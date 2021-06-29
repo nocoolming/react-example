@@ -18,7 +18,7 @@ pipeline {
         stage('Deploy'){
             agent any
             steps {
-                sh 'echo "Timestamp: ${currentBuild.startTimeInMillis}'
+                sh 'echo "Timestamp: ${currentBuild.startTimeInMillis}"'
                 sh 'echo "Timestamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"'
                 sh 'VERSION = ${currentBuild.startTimeInMillis}'
                 sh 'echo ${VERSION}'
