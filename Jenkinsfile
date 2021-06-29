@@ -18,11 +18,11 @@ pipeline {
             agent any
             steps {
                 sh 'VERSION=$(date +%s)'
-		sh 'echo 'version is : ${VERSION}'
-                sh 'docker build -t nocoolming/react-app:${VERSION} .'
+		sh 'echo "version is :" $VERSION'
+                sh 'docker build -t nocoolming/react-app:$VERSION .'
                 sh 'ls -al '
                 sh 'cat ./docker_hub_password.txt | docker login --username nocoolming --password-stdin'
-                sh 'docker push nocoolming/react-app:${VERSION}'
+                sh 'docker push nocoolming/react-app:$VERSION'
             }
         }
         
