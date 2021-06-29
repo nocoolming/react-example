@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker 'node:lts-buster-slim'}
+    agent any
     stages {
         stage('Test') {
             steps {
@@ -8,17 +8,21 @@ pipeline {
             }
         }
         stage('Build'){
+            agent { docker 'node:lts-buster-slim' }
             steps {
+                sh 'docker pull node:lts-buster-slim'
                 sh 'npm i'
                 sh 'npm run build'
+
+            }
+        }
+        stage('Deploy'){
+            agent any
+            steps {
                 sh 'docker build -t nocoolming/react-app:latest version .'
                 sh 'ls -al '
                 sh 'cat ~/docker_hub_password | docker login --username nocoolming --password-stdin'
                 sh 'docker push nocoolming/react-app:latest'
-            }
-        }
-        stage('Deploy'){
-            steps {
                 sh 'docker push nocoolming/react-app:latest'
             }
         }
