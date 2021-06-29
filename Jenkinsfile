@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        VERSION = '$(date +%s)'
+        VERSION = sh '$(date +%s)'
     }
     stages {
         stage('Build'){
