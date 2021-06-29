@@ -14,7 +14,7 @@ pipeline {
 		        sh 'echo "version is :" $version '
                 sh 'npm i'
                 sh 'npm run build'
-
+                sh 'ls'
             }
         }
         stage('Test') {
