@@ -23,7 +23,6 @@ pipeline {
                 sh 'ls -al '
                 sh 'cat ~/docker_hub_password | docker login --username nocoolming --password-stdin'
                 sh 'docker push nocoolming/react-app:latest'
-                sh 'docker push nocoolming/react-app:latest'
             }
         }
         
