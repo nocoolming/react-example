@@ -1,8 +1,6 @@
 pipeline {
     agent any
-    environment {
-        VERSION = sh '$(date +%s)'
-    }
+    
     stages {
         stage('Build'){
             agent { docker 'node:lts-buster-slim' }
@@ -20,12 +18,13 @@ pipeline {
         stage('Deploy'){
             agent any
             steps {
-                sh 'echo $VERSION'
-		        sh 'echo "version is :" $VERSION '
-                sh 'docker build -t nocoolming/react-app:v$VERSION .'
+                def VERSION = sh '$(date +%s)'
+                sh 'echo ${VERSION}'
+		        sh 'echo "version is :" ${VERSION} '
+                sh 'docker build -t nocoolming/react-app:v${VERSION} .'
                 sh 'ls -al '
                 sh 'cat ./docker_hub_password.txt | docker login --username nocoolming --password-stdin'
-                sh 'docker push nocoolming/react-app:v$VERSION'
+                sh 'docker push nocoolming/react-app:v${VERSION}'
             }
         }
         
