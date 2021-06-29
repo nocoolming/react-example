@@ -3,6 +3,6 @@ FROM nginx
 
 WORKDIR /web
 
-COPY ./build/* ./
+COPY ./build/* /web/
 
 
