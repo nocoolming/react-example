@@ -1,11 +1,15 @@
+def createVersion(){
+    return new Date().getTime()
+}
 pipeline {
     agent any
-    
+    environment {
+        version = createVersion()
+    }
     stages {
         stage('Build'){
             agent { docker 'node:lts-buster-slim' }
             steps {
-                version = sh (script: '$(date +%s)', returnStatus: true)
                 sh 'echo $version'
 		        sh 'echo "version is :" $version '
                 sh 'npm i'
@@ -21,7 +25,6 @@ pipeline {
         stage('Deploy'){
             agent any
             steps {
-                version = sh (script: '$(date +%s)', returnStatus: true)
                 sh 'echo $version'
 		        sh 'echo "version is :" $version '
                 sh 'docker build -t nocoolming/react-app:v$version .'
