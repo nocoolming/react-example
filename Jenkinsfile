@@ -5,10 +5,7 @@ pipeline {
         stage('Build'){
             agent { docker 'node:lts-buster-slim' }
             steps {
-
-                sh 'echo "Timestamp: ${currentBuild.startTimeInMillis}"'
-                sh 'echo "Timestamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"'
-                sh 'VERSION = ${currentBuild.startTimeInMillis}'
+                sh 'VERSION = $(date +%s)'
                 sh 'echo ${VERSION}'
 		        sh 'echo "version is :" ${VERSION} '
                 sh 'npm i'
@@ -24,9 +21,7 @@ pipeline {
         stage('Deploy'){
             agent any
             steps {
-                sh 'echo "Timestamp: ${currentBuild.startTimeInMillis}"'
-                sh 'echo "Timestamp: ${Util.getTimeSpanString(System.currentTimeMillis())}"'
-                sh 'VERSION = ${currentBuild.startTimeInMillis}'
+                sh 'VERSION = $(date +%s)'
                 sh 'echo ${VERSION}'
 		        sh 'echo "version is :" ${VERSION} '
                 sh 'docker build -t nocoolming/react-app:v${VERSION} .'
